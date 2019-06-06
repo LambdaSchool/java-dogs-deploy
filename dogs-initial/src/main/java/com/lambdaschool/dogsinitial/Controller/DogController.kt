@@ -24,8 +24,8 @@ class DogController {
 
     val logger: Logger = LoggerFactory.getLogger(DogController::class.java)
 
-    @Autowired
-    var rt: RabbitTemplate? = null
+/*    @Autowired
+    var rt: RabbitTemplate? = null*/
 
 
     // localhost:8080/dogs.html/dogs.html
@@ -39,7 +39,7 @@ class DogController {
     fun getDogDetail(@PathVariable id: Long, request: HttpServletRequest): ResponseEntity<*> {
         logger.info("/dogs/$id has been accessed")
         val message = MessageDetails("${request.requestURI} has been accessed", 7, true)
-        rt?.convertAndSend(DogsinitialApplication.QUEUE_NAME_HIGH , message)
+        //rt?.convertAndSend(DogsinitialApplication.QUEUE_NAME_HIGH , message)
         val rtnDog = DogsinitialApplication.getOurDogList().findDog(CheckDog { d -> d.id == id }) ?: throw ResourceNotFoundException(message = "Dog with id $id cannot be found", cause = null)
         return ResponseEntity<Dog>(rtnDog, HttpStatus.OK)
     }
@@ -49,7 +49,7 @@ class DogController {
     fun getDogBreeds(@PathVariable breed: String): ResponseEntity<*> {
         logger.info("/dogs/breeds/$breed has been accessed")
         val message = MessageDetails("/dogs/breed/$breed has been accessed", 5, true)
-        rt?.convertAndSend(DogsinitialApplication.QUEUE_NAME_HIGH , message)
+        //rt?.convertAndSend(DogsinitialApplication.QUEUE_NAME_HIGH , message)
 //        val rtnDogs = DogsinitialApplication.getOurDogList().findDogs({ d -> d.getBreed().toUpperCase().equals(breed.toUpperCase()) })
         val rtnDogs = DogsinitialApplication.getOurDogList().findDogs(CheckDog { d -> d.breed.toUpperCase() == breed.toUpperCase() })
         if(rtnDogs.isEmpty()){
@@ -62,7 +62,7 @@ class DogController {
     fun getDogBreedTable():ModelAndView{
         logger.info("dogs/breedtabe has been accessed")
         val message = MessageDetails("/dogs/breedtable has been accessed", 1, false)
-        rt?.convertAndSend(DogsinitialApplication.QUEUE_NAME_LOW , message)
+        //rt?.convertAndSend(DogsinitialApplication.QUEUE_NAME_LOW , message)
         val mav: ModelAndView = ModelAndView("dogs")
         mav.addObject("dogList", DogsinitialApplication.getOurDogList().dogList)
 
@@ -73,7 +73,7 @@ class DogController {
     fun getDogsForApartments():ModelAndView{
         logger.info("/dogs/breedtable/apartments has been accessed")
         val message = MessageDetails("/dogs/breedtable/apartments has been accessed", 2, false)
-        rt?.convertAndSend(DogsinitialApplication.QUEUE_NAME_LOW , message)
+        //rt?.convertAndSend(DogsinitialApplication.QUEUE_NAME_LOW , message)
         val mav: ModelAndView = ModelAndView("dogsForApartments")
         mav.addObject("dogList", DogsinitialApplication.getOurDogList().dogList.filter { dog -> dog.isApartmentSuitable })
 

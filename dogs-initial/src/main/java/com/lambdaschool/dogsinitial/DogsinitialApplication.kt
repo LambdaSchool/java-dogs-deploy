@@ -20,9 +20,9 @@ open class DogsinitialApplication {
     companion object {
         private lateinit var ourDogList: DogList
 
-        const val EXCHANGE_NAME = "Exchange"
+/*        const val EXCHANGE_NAME = "Exchange"
         const val QUEUE_NAME_HIGH = "HighPriorityQueue"
-        const val QUEUE_NAME_LOW = "LowPriorityQueue"
+        const val QUEUE_NAME_LOW = "LowPriorityQueue"*/
 
         @JvmStatic
         fun main(args: Array<String>) {
@@ -37,7 +37,7 @@ open class DogsinitialApplication {
 
 
     }
-
+/*
     @Bean
     fun appExchange(): TopicExchange {
         return TopicExchange(EXCHANGE_NAME)
@@ -66,5 +66,5 @@ open class DogsinitialApplication {
     @Bean
     fun producerJackson2MessageConverter(): Jackson2JsonMessageConverter {
         return Jackson2JsonMessageConverter()
-    }
+    }*/
 }

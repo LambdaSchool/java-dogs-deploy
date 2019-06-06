@@ -4,6 +4,7 @@ import com.lambdaschool.dogsinitial.DogsinitialApplication
 import com.lambdaschool.dogsinitial.Model.MessageDetails
 import org.springframework.amqp.rabbit.annotation.RabbitListener
 import org.springframework.stereotype.Service
+/*
 
 @Service
 class MessageListener{
@@ -17,4 +18,4 @@ class MessageListener{
     fun recieveLowMessage(msg: MessageDetails){
         println("Message revieved: $msg")
     }
-}
+}*/
